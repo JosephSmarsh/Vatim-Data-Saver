@@ -2,7 +2,7 @@ from GeneralParser import returnconnectedclients
 
 
 def buildclientssection():
-    with open('data.vatsim.txt', 'r') as f:
+    with open('//Pi/homepi/Desktop/DataSaver/data.vatsim.txt', 'r') as f:
         subsection = f.read().split('CLIENTS:')
     generalsection = subsection[1].split('\n')
     clientsarray = []
@@ -32,6 +32,15 @@ def returnatc():
         if subpilot == clientsection[i][3]:
             atc.append(clientsection[i])
     return atc
+
+
+def returnlatlongpilots():
+    connectedclients = len(returnpilots())
+    pilots = returnpilots()
+    latlong = []
+    for i in range(0, connectedclients, 1):
+        latlong.append(pilots[i][5] + ', ' + pilots[i][6])
+    return latlong
 
 
 def searchbycallsign(callsign):

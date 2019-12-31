@@ -18,6 +18,7 @@ from timeit import default_timer
 
 def main():
 
+    ClientsParse.returnlatlongpilots()
 
     #                   ------GENERAL PARSER TEST-----
     # _______________________________________________________________________
@@ -35,9 +36,9 @@ def main():
     # ______________________________________________________________________
     #                         --SAVEVATDATA TEST--
     # ______________________________________________________________________
-    saveperiod = int(input("Please Enter A Save Period (Sec): "))
-    savepath = input("Please Enter A Save Directory: ")
-    DataSaver.savevatdata(saveperiod, savepath)
+    # saveperiod = int(input("Please Enter A Save Period (Sec): "))
+    # savepath = input("Please Enter A Save Directory: ")
+    # DataSaver.savevatdata(saveperiod, savepath)
     ______________________________________________________________________
     #                      --SAVELOCALVATDATA TEST--
     # ______________________________________________________________________
