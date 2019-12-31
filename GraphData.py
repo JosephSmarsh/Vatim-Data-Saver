@@ -18,7 +18,7 @@ def animate(i):
     with open('//Pi/homepi/Desktop/DataSaver/ClientSaves.txt', 'r') as f:
         subsection = f.read().split('\n')
 
-    for i in range(len(subsection) - 25, len(subsection), 2):
+    for i in range(1, len(subsection), 1):
         newsubsection = [subsection[i].split(',')]
         for i in range(0, len(newsubsection), 1):
             clientpoints.append(int(newsubsection[i][0]))

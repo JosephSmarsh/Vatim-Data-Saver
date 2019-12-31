@@ -3,6 +3,7 @@ import time
 import datetime
 import os
 from random import randint
+import ClientsParse
 
 
 def savevatdata(saveperiod, savepath):
@@ -25,13 +26,10 @@ def savevatdata(saveperiod, savepath):
 
 
 def savelocalvatdata():
-    while True:
-        pagecontents = requests.get(returnvalidlink()).text
-        localsave = open('data.vatsim.txt', 'w')
-        localsave.write(pagecontents)
-        localsave.close()
-        print("data.vatsim.txt updated at: " + datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S"))
-        time.sleep(120)
+    pagecontents = requests.get(returnvalidlink()).text
+    with open('data.vatsim.txt', 'w') as f:
+        f.write(pagecontents)
+    print("data.vatsim.txt updated at: " + datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S"))
 
 
 def savevatstatusdata():
@@ -41,10 +39,19 @@ def savevatstatusdata():
     """
     pagecontents = requests.get('http://status.vatsim.net/')
     newsavefile = open('status.vatsim.txt', 'w')
-
     for line in pagecontents.text:
         newsavefile.write(line.strip('\n'))
     print("status.vatsim.txt updated at: " + datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S"))
+
+
+def saveclientdata():
+    currenttime = datetime.datetime.utcnow().strftime("%Y-%m-%d, %H:%M:%S")
+    connectedclients = ClientsParse.returnconnectedclients()
+    atc = str(len(ClientsParse.returnatc()))
+    pilots = str(len(ClientsParse.returnpilots()))
+    with open('ClientSaves.txt', 'a') as f:
+        f.write('\n' + connectedclients + ', ' + atc + ', ' + pilots + ', ' + currenttime)
+    print(f.name + ' saved at: ' + datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S"))
 
 
 def returnvalidlink():
